@@ -4,10 +4,7 @@ import { Link } from 'react-router-dom'
 
 import ListGroup from 'react-bootstrap/ListGroup'
 
-import reactLogo from './../assets/react.svg'
-// import './../App.css'
-
-import { fruits } from './../global'
+import { fruits } from '@/global'
 
 export default function Index() {
   const links = fruits.map(({ id, url, name, imageURL }) => 

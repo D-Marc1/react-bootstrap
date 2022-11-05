@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom'
 
 import Alert from 'react-bootstrap/Alert'
 
-import { fruits } from './../../global'
+import { fruits } from '@/global'
 
 export default function Test() {
   const { url } = useParams()
