@@ -1,13 +1,22 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 
 import { Link } from 'react-router-dom'
 
 import ListGroup from 'react-bootstrap/ListGroup'
+import Container from 'react-bootstrap/Container'
+import Form from 'react-bootstrap/Form'
+import Navbar from 'react-bootstrap/Navbar'
 
 import { fruits } from '@/global'
 
 export default function Index() {
-  const links = fruits.map(({ id, url, name, imageURL }) => 
+  const [searchText, setSearchText] = useState('')
+
+  const filteredFruits = useMemo(() => {
+    return fruits.filter(({ name }) => name.toLowerCase().includes(searchText))
+  }, [searchText])
+
+  const links = filteredFruits.map(({ id, url, name, imageURL }) => 
     <ListGroup.Item key={id}>
       <img
         src={imageURL}
@@ -19,8 +28,27 @@ export default function Index() {
   )
 
   return (
-    <ListGroup className="mx-auto mt-4" style={{ width: '300px' }}>
-      {links}
-    </ListGroup>
+    <>
+      <Navbar bg="dark" expand="lg">
+        <Container fluid>
+          <Navbar.Brand className="text-white" href="#">Navbar scroll</Navbar.Brand>
+
+          <Form.Control
+            type="search"
+            value={searchText}
+            placeholder="Search"
+            className="me-2"
+            style={{ width: '400px' }}
+            aria-label="Search"
+            onInput={(event) => setSearchText(event.target.value)}
+          />
+        </Container>
+      </Navbar>
+
+      <ListGroup className="mx-auto mt-4" style={{ width: '300px' }}>
+        {links}
+      </ListGroup>
+
+    </>
   )
 }
