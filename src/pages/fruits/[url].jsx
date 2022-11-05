@@ -1,12 +1,16 @@
 import { useParams } from 'react-router-dom'
 
+// Import Bootstrap components
 import Alert from 'react-bootstrap/Alert'
 
+// Import the fruits array of objects
 import { fruits } from '@/global'
 
 export default function Test() {
+  // Correlates to the name of the file. In this case, it's called [url].jsx, so { url } is the name.
   const { url } = useParams()
 
+  // Get the specific fruit object that correlates to the url
   const { name, description, imageURL } =
     fruits.find((fruit) => fruit.url === url) ?? {}
 
